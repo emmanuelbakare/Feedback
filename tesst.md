@@ -43,7 +43,8 @@ go to [yahoo](http://yahoo "Yahoo Search")
 1. Item 1
 1. Item 2
     1. Nested Item 1
-    1. Nested Item 2
+    2. Nested Item 2
+    3. Another one
 1. Item 3
 
 ## **Code Block** Inline 
