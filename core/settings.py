@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'quality',
     'accounts',
     'fake',
+    
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -145,3 +148,9 @@ MEDIA_ROOT=BASE_DIR / 'images'
 MEDIA_URL='/images/'
 
 INTERNAL_IPS=["127.0.0.1"]
+
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"

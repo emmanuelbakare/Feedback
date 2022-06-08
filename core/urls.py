@@ -27,6 +27,7 @@ urlpatterns = [
     path('fake/', include('fake.urls')),
     path('competence/', include('competence.urls')),
     path('quality/', include('quality.urls')),
+    path('assessment/', include('assessment.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
