@@ -37,7 +37,6 @@ def bundle_create(request):
 def bundle_list(request, target="#child_list"):
     bundles=Bundle.objects.all()
     context=getContext(bundles,target=target)
-    print('BUNDLE CONTEXT', context)
     if request.htmx:
         return render(request, 'comp_qty/list.html', context)
     return render(request, 'competence/bundle/home.html', context)
