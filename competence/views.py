@@ -3,7 +3,12 @@ from django.shortcuts import render, reverse
 from django.urls import reverse_lazy 
 from django.views import generic
 from competence.models import Competence, Bundle
+
+from utils.build import EndPoints
+from utils.models import MakeQueryset
 # Create your views here.
+
+ 
 def getContext(obj_list=None, target="#obj_list",dtarget="#obj_list"):
     context={
         'object_list':obj_list,
@@ -25,14 +30,20 @@ def competenceCreate(request):
         return competenceList(request)
     
 def competenceList(request, target="#child_list",dtarget="#obj_list" ):
-    competences=Competence.objects.all() 
+    # competences=Competence.objects.all() 
    
-    context=getContext(competences,target=target, dtarget=dtarget)
+    # context=getContext(competences,target=target, dtarget=dtarget)
+    endpoints=get_endpoints(request)
+    endpoints.delete_target=dtarget
+    endpoints.retrieve="quality:list"
+    
+    context=endpoints.get_context()
     if request.htmx:
         return render(request, 'comp_qty/list.html', context)
     return  render(request, 'comp_qty/home.html', context)
-
-
+ 
+ 
+    
       
 def testcomp(request):
     return render(request, 'test.html',{})
@@ -55,7 +66,15 @@ def deleteCompetence(request, pk):
     return competenceList(request)
     
 
-#Competence Bundle codes
-# view code in views_bundles
+
+def get_endpoints(request):
+    #create a queryset from the model name supplied
+    makequery=MakeQueryset("competence")
+    competences=makequery.queryset
+    # endpoints=EndPoints(model_name=competences, request=request)
+    # context=endpoints.get_context()
+    # return render(request, 'competence/endpoints.html', context)
+    return EndPoints(model_name=competences, request=request)
+    
  
 

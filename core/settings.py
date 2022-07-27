@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'quality',
     'accounts',
     'fake',
-    
+    # 'comptest',
     "crispy_forms",
     "crispy_bootstrap5",
 ]
