@@ -29,19 +29,7 @@ def competenceCreate(request):
         competence=Competence.objects.create(name=name)
         return competenceList(request)
     
-def competenceList(request, target="#child_list",dtarget="#obj_list" ):
-    # competences=Competence.objects.all() 
-   
-    # context=getContext(competences,target=target, dtarget=dtarget)
-    endpoints=get_endpoints(request)
-    endpoints.delete_target=dtarget
-    endpoints.retrieve="quality:list"
-    
-    context=endpoints.get_context()
-    if request.htmx:
-        return render(request, 'comp_qty/list.html', context)
-    return  render(request, 'comp_qty/home.html', context)
- 
+
  
     
       
@@ -65,7 +53,19 @@ def deleteCompetence(request, pk):
     competence.delete()
     return competenceList(request)
     
-
+def competenceList(request, target="#child_list",dtarget="#obj_list" ):
+    # competences=Competence.objects.all() 
+   
+    # context=getContext(competences,target=target, dtarget=dtarget)
+    endpoints=get_endpoints(request)
+    endpoints.delete_target=dtarget
+    endpoints.retrieve="quality:list"
+    
+    context=endpoints.get_context()
+    if request.htmx:
+        return render(request, 'comp_qty/list.html', context)
+    return  render(request, 'comp_qty/home.html', context)
+ 
 
 def get_endpoints(request):
     #create a queryset from the model name supplied
