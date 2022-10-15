@@ -5,7 +5,6 @@ from django.views import generic
 from competence.models import Competence, Bundle
 
 from utils.build import EndPoints
-from utils.models import MakeQueryset
 # Create your views here.
 
  
@@ -30,9 +29,6 @@ def competenceCreate(request):
         return competenceList(request)
     
 
- 
-    
-      
 def testcomp(request):
     return render(request, 'test.html',{})
  
@@ -53,28 +49,33 @@ def deleteCompetence(request, pk):
     competence.delete()
     return competenceList(request)
     
-def competenceList(request, target="#child_list",dtarget="#obj_list" ):
-    # competences=Competence.objects.all() 
-   
-    # context=getContext(competences,target=target, dtarget=dtarget)
-    endpoints=get_endpoints(request)
-    endpoints.delete_target=dtarget
-    endpoints.retrieve="quality:list"
-    
-    context=endpoints.get_context()
+def competenceList(request, target="#child_list", dtarget="#obj_list" ):
+    # context={
+    #     'object_list':obj_list,
+    #     'name':'competence',
+    #     'target':target,
+    #     'delete_target':dtarget,
+    #     'create':'competence:bundle-create',
+    #     'retrieve':'quality:list',
+    #     'update':'competence:update',
+    #     'delete':'competence:delete',
+    # }
+    endpoints=EndPoints("competence",defaults=True)
+    endpoints.new_path('target',target)
+    endpoints.new_path('create','competence:bundle-create') 
+    endpoints.new_path('delete_target',dtarget)
+    endpoints.new_path('retrieve','quality:list')
+    context=endpoints.context
+    print('CONTEXT \n ',context)
     if request.htmx:
         return render(request, 'comp_qty/list.html', context)
     return  render(request, 'comp_qty/home.html', context)
  
 
-def get_endpoints(request):
-    #create a queryset from the model name supplied
-    makequery=MakeQueryset("competence")
-    competences=makequery.queryset
-    # endpoints=EndPoints(model_name=competences, request=request)
-    # context=endpoints.get_context()
-    # return render(request, 'competence/endpoints.html', context)
-    return EndPoints(model_name=competences, request=request)
+# def get_endpoints(request):
+#     makequery=MakeQueryset("competence")
+#     competences=makequery.queryset
+#     return EndPoints(model_name=competences, request=request)
     
  
 

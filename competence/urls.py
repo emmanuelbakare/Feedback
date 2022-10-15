@@ -8,7 +8,7 @@ urlpatterns = [
     path('', views.competenceList, name="competence"),
     path('test/', views.testcomp, name="test"),
     path('create/', views.competenceCreate, name="create"),
-    path('endpoints/', views.get_endpoints, name="endpoints"),
+    # path('endpoints/', views.get_endpoints, name="endpoints"), 
     
     path('<int:pk>/', include([
         path('', views.competenceUpdate, name='update'),
