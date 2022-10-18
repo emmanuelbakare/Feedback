@@ -6,7 +6,6 @@ app_name="competence"
 urlpatterns = [
     # path('', views.CompetenceList.as_view(), name="competence"),
     path('', views.competenceList, name="competence"),
-    path('test/', views.testcomp, name="test"),
     path('create/', views.competenceCreate, name="create"),
     # path('endpoints/', views.get_endpoints, name="endpoints"), 
     

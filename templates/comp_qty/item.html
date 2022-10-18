@@ -19,7 +19,7 @@
         
             <span class="badge bg-danger rounded-pill pointer"
                 hx-delete="{% url delete obj2.pk  %}"
-                hx-target="{{delete_target}}"
+                hx-target="closest section"
                
                 hx-confirm="Are You sure you want to delete this {{name|title}} - {{obj2.name}}?"
                 hx-include="[name='parent_obj']"

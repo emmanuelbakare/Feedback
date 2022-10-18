@@ -59,7 +59,10 @@ class MakeModelOrQueryset:
 
     def get_model_obj(self, model_base, pk):
         ''' generate model instance using the provided pk'''
-        return model_base.objects.get(pk=pk)
+        try:
+            return model_base.objects.get(pk=pk)
+        except model_base.DoesNotExist:
+            return None
 
     @property 
     def queryset(self):
