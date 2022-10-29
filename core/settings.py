@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # 'comptest',
     "crispy_forms",
     "crispy_bootstrap5",
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

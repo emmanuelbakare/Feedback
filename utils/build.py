@@ -3,6 +3,7 @@ from django.db import models
 from utils.models import MakeModelOrQueryset
 
 
+
     
 
 class EndPoints:
@@ -28,12 +29,6 @@ class EndPoints:
             else:
                 self.object_list = MakeModelOrQueryset(model_name,app_name).queryset
 
-
-        # self.name=model_name
-        # if pk:
-        #     self.obj2 = MakeModelOrQueryset(model_name,app_name, pk=pk).queryset
-        # else:
-        #     self.object_list = MakeModelOrQueryset(model_name,app_name).queryset
 
 
         if defaults:
@@ -118,16 +113,20 @@ class EndPoints:
         return model_base.objects.all()
     
 
+def get_model_fields(cls):
+    ''' get a model Class and return all the fields it contains'''
+    fields=cls._meta.get_fields()
+    return [field.name for field in fields if isinstance(field, models.fields.Field)]
     
 
-endpoint=EndPoints("competence",pk=20, defaults=True)
-print('ENDPOINT OBJECT \n', endpoint)
+# endpoint=EndPoints("competence",pk=20, defaults=True)
+# print('ENDPOINT OBJECT \n', endpoint)
 # # endpoint.defaults()
 # endpoint.new_path('gender','male')
-context=endpoint.context
-print('ENDPOINT CONTEXT: \n',context)
+# context=endpoint.context
+# print('ENDPOINT CONTEXT: \n',context)
 
-print('NEW QUERY \n',MakeModelOrQueryset("competence", pk=2).queryset ) 
+# print('NEW QUERY \n',MakeModelOrQueryset("competence", pk=2).queryset ) 
 
-print('ENDPOINT QUERY OBJECT ', endpoint.query_object)
+# print('ENDPOINT QUERY OBJECT ', endpoint.query_object)
       

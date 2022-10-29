@@ -3,8 +3,9 @@ from django.shortcuts import render, reverse
 from django.urls import reverse_lazy 
 from django.views import generic
 from competence.models import Competence, Bundle
+from django.db.models.fields import Field 
 
-from utils.build import EndPoints
+from utils.build import EndPoints, get_model_fields
 from utils.models import MakeModelOrQueryset
 # Create your views here.
 
@@ -76,6 +77,24 @@ def competenceList(request, target="#child_list", dtarget="#obj_list" ):
         return render(request, 'comp_qty/list.html', context)
     return  render(request, 'comp_qty/home.html', context)
  
+
+def table_comp(request):
+    competences=Competence.objects.all()
+    endpoints=EndPoints(competences, defaults=True)
+    
+    # model header -- retrieve only the fields in the model
+    # headers=[field.name for field in Competence._meta.get_fields() if isinstance(field, Field)]
+    headers=get_model_fields(Competence)
+    endpoints.new_path('headers', headers)
+
+    context=endpoints.context
+    print('CONTEXT', context)
+    return render(request, 'table/table.html', context)
+
+
+# def get_model_fields(cls):
+#     fields=cls._meta.get_fields()
+#     return [field.name for field in fields if isinstance(field, Field)]
  
  
 

@@ -1,12 +1,17 @@
 from django.urls import path, include 
 from competence import views
 from competence import views_bundles
+# from competence import api
+# from competence.api import views as apiviews
 
 app_name="competence"
 urlpatterns = [
     # path('', views.CompetenceList.as_view(), name="competence"),
     path('', views.competenceList, name="competence"),
+    path('api/', include('competence.api.urls')),
+
     path('create/', views.competenceCreate, name="create"),
+    path('table/', views.table_comp, name="table-comp"),
     # path('endpoints/', views.get_endpoints, name="endpoints"), 
     
     path('<int:pk>/', include([

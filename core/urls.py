@@ -29,5 +29,7 @@ urlpatterns = [
     path('quality/', include('quality.urls')),
     path('assessment/', include('assessment.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
+
+    # path('api/', include('competence.api.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
